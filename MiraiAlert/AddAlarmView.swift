@@ -89,6 +89,7 @@ struct AddAlarmView: View {
                                     .background(Color(UIColor.secondarySystemBackground))
                                     .cornerRadius(10)
                                     .padding(.horizontal, 16)
+                                    .accessibilityIdentifier("date_picker")
                             }
                             
                             // Time section
@@ -104,6 +105,7 @@ struct AddAlarmView: View {
                                     .background(Color(UIColor.secondarySystemBackground))
                                     .cornerRadius(10)
                                     .padding(.horizontal, 16)
+                                    .accessibilityIdentifier("time_picker")
                             }
                             
                             // Note section
@@ -119,6 +121,7 @@ struct AddAlarmView: View {
                                     .background(Color(UIColor.secondarySystemBackground))
                                     .cornerRadius(10)
                                     .padding(.horizontal, 16)
+                                    .accessibilityIdentifier("note_field")
                             }
                             
                             // Sound section
@@ -141,6 +144,7 @@ struct AddAlarmView: View {
                                 .background(Color(UIColor.secondarySystemBackground))
                                 .cornerRadius(10)
                                 .padding(.horizontal, 16)
+                                .accessibilityIdentifier("sound_picker")
                             }
                         }
                         .padding(.bottom, 20)

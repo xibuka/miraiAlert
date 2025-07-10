@@ -100,6 +100,7 @@ struct AlarmListView: View {
                     .listStyle(PlainListStyle())
                     .scrollContentBackground(.hidden)
                     .environment(\.defaultMinListRowHeight, 80)
+                    .accessibilityIdentifier("alarms_list")
                 }
             }
             .navigationTitle("Alarms")
@@ -114,6 +115,7 @@ struct AlarmListView: View {
                             .font(.system(size: 18, weight: .medium))
                             .foregroundColor(.orange)
                     }
+                    .accessibilityIdentifier("add_alarm_button")
                 }
                 
                 if !alarms.isEmpty {
