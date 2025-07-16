@@ -6,6 +6,7 @@ struct AlarmListView: View {
     @Environment(\.editMode) private var editMode
     @EnvironmentObject var notificationManager: NotificationManager
     @State private var showingAddAlarm = false
+    @State private var selectedAlarm: AlarmEntity?
     
     @FetchRequest(
         entity: AlarmEntity.entity(),
@@ -63,7 +64,7 @@ struct AlarmListView: View {
                             .listRowSeparator(.hidden)
                             .onTapGesture {
                                 if editMode?.wrappedValue == .inactive {
-                                    showingAddAlarm = true
+                                    selectedAlarm = alarm
                                 }
                             }
                             .contextMenu {
@@ -128,6 +129,9 @@ struct AlarmListView: View {
         }
         .sheet(isPresented: $showingAddAlarm) {
             AddAlarmView()
+        }
+        .sheet(item: $selectedAlarm) { alarm in
+            UpdateAlarmView(alarm: alarm)
         }
     }
     

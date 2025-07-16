@@ -46,7 +46,6 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate, Observab
                               didReceive response: UNNotificationResponse,
                               withCompletionHandler completionHandler: @escaping () -> Void) {
         
-        let userInfo = response.notification.request.content.userInfo
         let alarmId = response.notification.request.identifier
         
         print("User tapped notification for alarm: \(alarmId)")

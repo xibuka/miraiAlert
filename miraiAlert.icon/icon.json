@@ -1,0 +1,36 @@
+{
+  "fill" : {
+    "solid" : "extended-srgb:0.00000,0.47843,1.00000,1.00000"
+  },
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "fill" : "none",
+          "glass" : false,
+          "hidden" : false,
+          "image-name" : "60b957cbfd93b4a74919683c7d9a30182e4bf7d86d152e64df759aa62883b2d5 2.jpg",
+          "name" : "60b957cbfd93b4a74919683c7d9a30182e4bf7d86d152e64df759aa62883b2d5 2",
+          "position" : {
+            "scale" : 1.6,
+            "translation-in-points" : [
+              -53.27082917565838,
+              -15.42216750488383
+            ]
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "squares" : "shared"
+  }
+}
