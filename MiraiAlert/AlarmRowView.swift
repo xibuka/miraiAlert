@@ -25,7 +25,7 @@ struct AlarmRowView: View {
     
     var body: some View {
         HStack {
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: 4) {
                 HStack(alignment: .bottom, spacing: 6) {
                     Text(timeFormatter.string(from: alarm.date))
                         .font(.system(size: 42, weight: .semibold, design: .default))
@@ -41,13 +41,16 @@ struct AlarmRowView: View {
                 .fixedSize(horizontal: true, vertical: false)
                 
                 Text(dateFormatter.string(from: alarm.date))
-                    .font(.system(size: 17))
+                    .font(.system(size: 16, weight: .medium))
                     .foregroundColor(isEnabled ? .white : .gray)
                 
                 if !alarm.note.isEmpty {
                     Text(alarm.note)
-                        .font(.system(size: 15))
-                        .foregroundColor(isEnabled ? .secondary : .gray)
+                        .font(.system(size: 14, weight: .regular))
+                        .foregroundColor(isEnabled ? .gray : .gray.opacity(0.7))
+                        .lineLimit(2)
+                        .multilineTextAlignment(.leading)
+                        .padding(.top, 2)
                 }
             }
             
@@ -59,10 +62,13 @@ struct AlarmRowView: View {
                     .scaleEffect(0.8)
             }
         }
-        .padding(.vertical, 8)
+        .padding(.vertical, 12)
         .padding(.horizontal, 16)
-        .background(Color(UIColor.secondarySystemBackground))
-        .cornerRadius(10)
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .fill(Color(UIColor.secondarySystemBackground))
+                .shadow(color: Color.black.opacity(0.1), radius: 1, x: 0, y: 1)
+        )
         .opacity(editMode?.wrappedValue == .active ? 0.8 : 1.0)
     }
 }
@@ -72,7 +78,7 @@ struct AlarmRowView: View {
         AlarmRowView(
             alarm: AlarmModel(
                 date: Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date(),
-                note: "Morning run",
+                note: "Morning run - Don't forget your running shoes!",
                 soundName: "Radar"
             ),
             isEnabled: .constant(true)
@@ -81,11 +87,20 @@ struct AlarmRowView: View {
         AlarmRowView(
             alarm: AlarmModel(
                 date: Calendar.current.date(byAdding: .day, value: 2, to: Date()) ?? Date(),
-                note: "Doctor appointment",
+                note: "Doctor appointment at City Hospital",
                 soundName: "Beacon",
                 isEnabled: false
             ),
             isEnabled: .constant(false)
+        )
+        
+        AlarmRowView(
+            alarm: AlarmModel(
+                date: Calendar.current.date(byAdding: .day, value: 3, to: Date()) ?? Date(),
+                note: "",
+                soundName: "Default"
+            ),
+            isEnabled: .constant(true)
         )
     }
     .padding()

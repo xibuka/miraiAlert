@@ -100,7 +100,7 @@ struct AlarmListView: View {
                     }
                     .listStyle(PlainListStyle())
                     .scrollContentBackground(.hidden)
-                    .environment(\.defaultMinListRowHeight, 80)
+                    .environment(\.defaultMinListRowHeight, 90)
                     .accessibilityIdentifier("alarms_list")
                 }
             }
