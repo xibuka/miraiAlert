@@ -6,16 +6,17 @@
     {
       "layers" : [
         {
-          "fill" : "none",
+          "blend-mode" : "normal",
+          "fill" : "automatic",
           "glass" : false,
           "hidden" : false,
-          "image-name" : "60b957cbfd93b4a74919683c7d9a30182e4bf7d86d152e64df759aa62883b2d5 2.jpg",
-          "name" : "60b957cbfd93b4a74919683c7d9a30182e4bf7d86d152e64df759aa62883b2d5 2",
+          "image-name" : "60b957cbfd93b4a74919683c7d9a30182e4bf7d86d152e64df759aa62883b2d5.jpg",
+          "name" : "60b957cbfd93b4a74919683c7d9a30182e4bf7d86d152e64df759aa62883b2d5",
           "position" : {
-            "scale" : 1.6,
+            "scale" : 1.62,
             "translation-in-points" : [
-              -53.27082917565838,
-              -15.42216750488383
+              -27.375,
+              -16.4609375
             ]
           }
         }
