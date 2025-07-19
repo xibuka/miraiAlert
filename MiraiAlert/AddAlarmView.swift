@@ -131,16 +131,43 @@ struct AddAlarmView: View {
                                     .foregroundColor(.white)
                                     .padding(.horizontal, 16)
                                 
-                                Picker("Sound", selection: $selectedSound) {
-                                    ForEach(soundOptions, id: \.self) { sound in
-                                        Text(sound)
-                                            .foregroundColor(.white)
-                                            .tag(sound)
+                                VStack(spacing: 0) {
+                                    ForEach(Array(soundOptions.enumerated()), id: \.offset) { index, sound in
+                                        Button(action: {
+                                            selectedSound = sound
+                                            // Add haptic feedback
+                                            let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+                                            impactFeedback.impactOccurred()
+                                        }) {
+                                            HStack {
+                                                Text(sound)
+                                                    .font(.system(size: 16, weight: .regular))
+                                                    .foregroundColor(.white)
+                                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                                
+                                                if selectedSound == sound {
+                                                    Image(systemName: "checkmark")
+                                                        .font(.system(size: 16, weight: .semibold))
+                                                        .foregroundColor(.orange)
+                                                }
+                                            }
+                                            .padding(.horizontal, 16)
+                                            .padding(.vertical, 12)
+                                            .background(
+                                                selectedSound == sound 
+                                                    ? Color.orange.opacity(0.1) 
+                                                    : Color.clear
+                                            )
+                                            .contentShape(Rectangle())
+                                        }
+                                        .buttonStyle(.plain)
+                                        
+                                        if index < soundOptions.count - 1 {
+                                            Divider()
+                                                .background(Color.gray.opacity(0.3))
+                                        }
                                     }
                                 }
-                                .pickerStyle(.menu)
-                                .foregroundColor(.white)
-                                .padding()
                                 .background(Color(UIColor.secondarySystemBackground))
                                 .cornerRadius(10)
                                 .padding(.horizontal, 16)
