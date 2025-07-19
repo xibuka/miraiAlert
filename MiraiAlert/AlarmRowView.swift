@@ -56,11 +56,11 @@ struct AlarmRowView: View {
             
             Spacer()
             
-            if editMode?.wrappedValue == .inactive {
-                Toggle("", isOn: $isEnabled)
-                    .toggleStyle(SwitchToggleStyle(tint: Color.orange))
-                    .scaleEffect(0.8)
-            }
+            Toggle("", isOn: $isEnabled)
+                .toggleStyle(SwitchToggleStyle(tint: Color.orange))
+                .scaleEffect(0.8)
+                .opacity(editMode?.wrappedValue == .inactive ? 1.0 : 0.0)
+                .animation(.easeInOut(duration: 0.2), value: editMode?.wrappedValue)
         }
         .padding(.vertical, 12)
         .padding(.horizontal, 16)
