@@ -36,7 +36,7 @@ class NotificationManager: ObservableObject {
     
     func scheduleAlarmNotification(for alarm: AlarmEntity) async {
         guard isAuthorized else {
-            print("Notification permission not granted")
+            print("Notification permission not granted - alarm saved but no notification will be scheduled")
             return
         }
         

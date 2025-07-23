@@ -7,6 +7,7 @@ struct AlarmListView: View {
     @EnvironmentObject var notificationManager: NotificationManager
     @State private var showingAddAlarm = false
     @State private var selectedAlarm: AlarmEntity?
+    @State private var showingPermissionAlert = false
     
     @FetchRequest(
         entity: AlarmEntity.entity(),
@@ -16,11 +17,28 @@ struct AlarmListView: View {
     
     var body: some View {
         NavigationStack {
-            ZStack {
-                Color.black
-                    .ignoresSafeArea()
+            VStack(spacing: 0) {
+                // Notification permission banner
+                if notificationManager.authorizationStatus == .notDetermined || notificationManager.authorizationStatus == .denied {
+                    NotificationPermissionBanner(
+                        authorizationStatus: notificationManager.authorizationStatus,
+                        onRequestPermission: {
+                            if notificationManager.authorizationStatus == .notDetermined {
+                                Task {
+                                    await notificationManager.requestNotificationPermission()
+                                }
+                            } else {
+                                showingPermissionAlert = true
+                            }
+                        }
+                    )
+                }
                 
-                if alarms.isEmpty {
+                ZStack {
+                    Color.black
+                        .ignoresSafeArea()
+                    
+                    if alarms.isEmpty {
                     VStack(spacing: 20) {
                         Image(systemName: "alarm")
                             .font(.system(size: 60))
@@ -102,6 +120,7 @@ struct AlarmListView: View {
                     .scrollContentBackground(.hidden)
                     .environment(\.defaultMinListRowHeight, 90)
                     .accessibilityIdentifier("alarms_list")
+                    }
                 }
             }
             .navigationTitle("Alarms")
@@ -132,6 +151,16 @@ struct AlarmListView: View {
         }
         .sheet(item: $selectedAlarm) { alarm in
             UpdateAlarmView(alarm: alarm)
+        }
+        .alert("Notification Permission Required", isPresented: $showingPermissionAlert) {
+            Button("Go to Settings") {
+                if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(settingsURL)
+                }
+            }
+            Button("Cancel", role: .cancel) { }
+        } message: {
+            Text("To receive alarm notifications, please enable notifications for MiraiAlert in your device Settings.")
         }
     }
     

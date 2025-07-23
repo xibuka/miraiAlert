@@ -204,6 +204,9 @@ struct AddAlarmView: View {
             Text("Please select a date and time in the future.")
         }
         .alert("Notification Permission Required", isPresented: $showingPermissionAlert) {
+            Button("Save Without Notifications") {
+                saveAlarmWithoutNotifications()
+            }
             Button("Go to Settings") {
                 if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
                     UIApplication.shared.open(settingsURL)
@@ -211,7 +214,7 @@ struct AddAlarmView: View {
             }
             Button("Cancel", role: .cancel) { }
         } message: {
-            Text("Please enable notifications in Settings to receive alarm alerts.")
+            Text("Enable notifications to receive alarm alerts, or save the alarm without notifications.")
         }
     }
     
@@ -230,6 +233,12 @@ struct AddAlarmView: View {
             return
         }
         
+        saveAlarmWithNotifications()
+    }
+    
+    private func saveAlarmWithNotifications() {
+        let finalDateTime = combine(date: selectedDate, time: selectedTime)
+        
         // Create new alarm entity
         let newAlarm = AlarmEntity.createAlarm(
             context: viewContext,
@@ -247,6 +256,27 @@ struct AddAlarmView: View {
                 await notificationManager.scheduleAlarmNotification(for: newAlarm)
             }
             
+            dismiss()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+    
+    private func saveAlarmWithoutNotifications() {
+        let finalDateTime = combine(date: selectedDate, time: selectedTime)
+        
+        // Create new alarm entity
+        _ = AlarmEntity.createAlarm(
+            context: viewContext,
+            date: finalDateTime,
+            note: note,
+            soundName: selectedSound
+        )
+        
+        // Save to CoreData without scheduling notification
+        do {
+            try viewContext.save()
             dismiss()
         } catch {
             let nsError = error as NSError

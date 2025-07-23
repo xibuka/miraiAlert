@@ -19,20 +19,18 @@ struct MiraiAlertApp: App {
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(notificationManager)
                 .onAppear {
-                    setupNotifications()
+                    setupNotificationDelegate()
                 }
         }
     }
     
-    private func setupNotifications() {
+    private func setupNotificationDelegate() {
+        // Only set up notification delegate, don't request permissions automatically
+        UNUserNotificationCenter.current().delegate = NotificationDelegate.shared
+        
+        // Update authorization status without requesting permission
         Task {
             await notificationManager.updateAuthorizationStatus()
-            if notificationManager.authorizationStatus == .notDetermined {
-                await notificationManager.requestNotificationPermission()
-            }
         }
-        
-        // Set up notification delegate to handle foreground notifications
-        UNUserNotificationCenter.current().delegate = NotificationDelegate.shared
     }
 }
