@@ -1,6 +1,6 @@
 import XCTest
 
-final class FutureAlarmUITests: UITestBase {
+final class MiraiAlertUITests: UITestBase {
     
     override func setUp() {
         super.setUp()

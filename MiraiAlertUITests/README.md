@@ -5,7 +5,7 @@ This directory contains comprehensive XCUITest automated UI tests for the MiraiA
 ## Test Files
 
 ### Core Test Files
-- **`FutureAlarmUITests.swift`** - Main UI test suite with core functionality tests
+- **`MiraiAlertUITests.swift`** - Main UI test suite with core functionality tests
 - **`MiraiAlertUITests.swift`** - Original basic UI test implementation
 - **`MiraiAlertUITestsEnhancements.swift`** - Enhanced tests for edge cases and validation
 - **`UITestHelpers.swift`** - Helper utilities and base classes for UI testing
@@ -16,7 +16,7 @@ This directory contains comprehensive XCUITest automated UI tests for the MiraiA
 
 ## Test Coverage
 
-### Core Tests (FutureAlarmUITests.swift)
+### Core Tests (MiraiAlertUITests.swift)
 1. **`testAddAlarm`** - Tests adding a new alarm with date, time, note, and sound selection
 2. **`testEditAlarm`** - Tests editing an existing alarm and verifying changes
 3. **`testDeleteAlarm`** - Tests deleting an alarm using swipe-to-delete functionality
@@ -66,10 +66,10 @@ The following accessibility identifiers are used in the tests:
 xcodebuild test -scheme MiraiAlert -destination 'platform=iOS Simulator,name=iPhone 16 Pro' -only-testing:MiraiAlertUITests
 
 # Run specific test class
-xcodebuild test -scheme MiraiAlert -destination 'platform=iOS Simulator,name=iPhone 16 Pro' -only-testing:MiraiAlertUITests/FutureAlarmUITests
+xcodebuild test -scheme MiraiAlert -destination 'platform=iOS Simulator,name=iPhone 16 Pro' -only-testing:MiraiAlertUITests/MiraiAlertUITests
 
 # Run specific test method
-xcodebuild test -scheme MiraiAlert -destination 'platform=iOS Simulator,name=iPhone 16 Pro' -only-testing:MiraiAlertUITests/FutureAlarmUITests/testAddAlarm
+xcodebuild test -scheme MiraiAlert -destination 'platform=iOS Simulator,name=iPhone 16 Pro' -only-testing:MiraiAlertUITests/MiraiAlertUITests/testAddAlarm
 ```
 
 ### Xcode IDE
